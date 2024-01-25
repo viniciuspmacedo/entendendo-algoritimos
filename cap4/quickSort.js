@@ -1,23 +1,29 @@
 const numeros = [62, 3, 22, 12, 1];
 
-function quickSort(array){
-    if (array.length < 2){
+//funciona apenas para pivo no primeiro elemento do array
+
+function quickSort(array) {
+    if (array.length <= 1) {
         return array
-    }else{
-        particionamento(array)
-    }
-}
 
-function particionamento(array){
-    let maiores = [];
+    }
     let menores = [];
-    let pivo = Math.floor(array.length / 2);
-    
-    for (let i= 0; i < array.length; i++){
-        console.log(array[i], array[pivo]);
-        array[i] > array[pivo] ? maiores.push(array[i]) : menores.push(array[i]);
-    }
-    console.log('menores', menores, 'maiores', maiores);
+    let maiores = [];
+    let pivo = array[0];
+
+    for (let i = 1; i < array.length; i++) {
+        {
+            if (array[i] < pivo) {
+                menores.push(array[i])
+            } else {
+                maiores.push(array[i])
+            }
+        }
+    };
+
+    return ([...quickSort(menores), pivo, ...quickSort(maiores)])
+
 }
 
-particionamento(numeros)
+
+console.log(quickSort(numeros));
